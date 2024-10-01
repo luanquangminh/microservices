@@ -22,62 +22,152 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+### `README.md` file
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+```markdown
+# Introdcution
 
-## Project setup
+The **Graduation 1** project is a NestJS application using microservices to provide various APIs, including:
+- Retrieve student information (name + student ID)
+- Return the current date and time on the server
+- Get an email address with student ID and student name
+- Fetch exchange rates from Vietcombank
+- Transform the text to QRCode.
 
-```bash
-$ npm install
-```
+## 1. Installation
 
-## Compile and run the project
+### Step 1: Clone the project
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
+Use the following command to clone the project from GitHub to your local machine:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone https://github.com/luanquangminh/Microservices.git
 ```
 
-## Resources
+### Step 2: Install dependencies
 
-Check out a few resources that may come in handy when working with NestJS:
+Navigate to the `gr1` project directory and install the dependencies:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+cd gr1
+npm install
+```
 
-## Support
+### Step 3: Run the application
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+After installing the dependencies, run the application with the following command:
 
-## Stay in touch
+```bash
+npm run start
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+The application will run on `http://localhost:3000`.
+
+## 2. Main Features
+
+### 2.1. Retrieve student information
+
+- **Endpoint**: `/gr1/aboutus`
+- **Method**: GET
+- **Function**: Return the student's name and student ID.
+- **Example**:
+
+```
+GET http://localhost:3000/gr1/aboutus
+```
+
+- **Response**:
+
+```json
+{
+  "name": "Nguyen Van A",
+  "mssv": "20221111"
+}
+```
+
+### 2.2. Get the current date and time
+
+- **Endpoint**: `/gr1/today`
+- **Method**: GET
+- **Function**: Return the current date and time from the server.
+- **Example**:
+
+```
+GET http://localhost:3000/gr1/today
+```
+
+- **Response**:
+
+```json
+{
+  "currentDateTime": "2024-09-28T14:25:36.123Z"
+}
+```
+
+### 2.3. Generate an email address from student ID and name
+
+- **Endpoint**: `/gr1/generate-email`
+- **Method**: GET
+- **Parameters**:
+  - `mssv`: The student ID.
+  - `name`: The student's name.
+- **Function**: Generate an email address following the format `<firstName>.<lastInitialAndMiddleInitial>+6digitsOfStudentID@sis.hust.edu.vn`.
+- **Example**:
+
+```
+GET http://localhost:3000/gr1/generate-email?mssv=20221111&name=Nguyen%20Van%20A
+```
+
+- **Response**:
+
+```json
+{
+  "email": "a.nv221111@sis.hust.edu.vn"
+}
+```
+
+### 2.4. Fetch exchange rates from Vietcombank
+
+- **Endpoint**: `/gr1/vcb-exchange-rate`
+- **Method**: GET
+- **Function**: Fetch exchange rates from Vietcombank's API.
+- **Example**:
+
+```
+GET http://localhost:3000/gr1/vcb-exchange-rate
+```
+
+- **Response**:
+
+```json
+{
+  "rates": {
+    "USD": {
+      "buy": "23,000",
+      "sell": "23,200"
+    },
+    "EUR": {
+      "buy": "25,500",
+      "sell": "26,000"
+    }
+  }
+}
+```
+
+### 2.5. Return a QRCode of a given text
+
+- **Endpoint**: `/gr1/qrcode`
+- **Method**: GET
+- **Parameter**: `text` - The text to be encoded into a QR code.
+- **Function**: Return a QR code image for the given text.
+- **Example**:
+
+```
+GET http://localhost:3000/gr1/qrcode?text=HelloWorld
+```
+
+- **Response**: A PNG image of the QR code will be returned and displayed in the browser.
+
+
 
 
